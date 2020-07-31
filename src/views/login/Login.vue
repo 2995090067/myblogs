@@ -80,6 +80,8 @@
 
               console.log("下面是userinfo")
               console.log(userInfo)
+              console.log("userInfo的username")
+              console.log(userInfo.username)
               _this.$store.commit("SET_TOKEN",jwt)
               _this.$store.commit("SET_USERINFO",userInfo)
 

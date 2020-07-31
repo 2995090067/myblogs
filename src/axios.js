@@ -42,8 +42,9 @@ axios.interceptors.response.use(response => {
       if (error.response.data) {
         error.message = error.response.data.msg
       }
-
+      //如果未经授权
       if (error.response.status === 401) {
+        //移除登录状态
         store.commit("REMOVE_INFO")
         router.push("/login")
       }
