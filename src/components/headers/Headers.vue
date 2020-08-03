@@ -9,6 +9,7 @@
         <el-avatar slot="header-img" :size="50" :src=avatar></el-avatar>
 <!--        登陆状态-->
         <span class="to-user-name" slot="to-user-name" @click="loginClick">{{userName.default}}</span>
+<!--        <span class="to-user-name" slot="to-user-name" >{{userName.default}}</span>-->
 
       </HeaderItem>
 
@@ -54,7 +55,8 @@
     },
     methods: {
       loginClick() {
-        if (this.userName.default = '请先登陆') {
+        //比较字符串前先清除所有的空格
+        if ('请先登录'.trim()==this.userName.default.trim()) {
           console.log("触发点击事件")
           this.$router.push('/login')
         }else {
@@ -67,6 +69,7 @@
 
 <style scoped>
   .headers-css {
+    /*这里由于APP全局设定了max-with，可以不用设定*/
     max-width: 960px;
     margin: 0 auto;
     text-align: center;

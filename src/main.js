@@ -10,6 +10,12 @@ import axios from 'axios' //测试一下
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+//用作博客编辑器
+import  mavonEditor from 'mavon-editor'
+
+import 'mavon-editor/dist/css/index.css'
+
+
 // 导入全局拦截的axiosJS
 
 import "./axios"
@@ -21,6 +27,9 @@ Vue.prototype.$axios = axios  //测试一下
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+
+// 使用插件编辑器
+Vue.use(mavonEditor)
 
 new Vue({
   router,

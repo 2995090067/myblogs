@@ -4,7 +4,7 @@
 
     <el-divider direction="vertical"></el-divider>
 
-    <span><el-link type="success" :href="blogAdd">我的发表</el-link></span>
+    <span><el-link type="success" :href="blogAdd" @click=Message()>我的发表</el-link></span>
 
     <el-divider direction="vertical"></el-divider>
 
@@ -16,10 +16,14 @@
 <script>
   import {loginOut} from "../../../network/loginrequest/loginout";
 
+  // 吐司、
+  import Toast from "../../toast/js/index";
+
   export default {
     name: "CutOffRule",
     components: {
-      loginOut
+      loginOut,
+      Toast
     },
     data() {
       return {
@@ -31,6 +35,9 @@
     created() {
       if (this.$store.getters.getUser.username) {
         this.isexit = true
+      }else{
+        this.blogAdd = '/blogs'
+        this.Message()
       }
     },
     methods: {
@@ -52,6 +59,19 @@
           console.log('开始跳转页面了！')
           _this.$router.push('/logininfo')
         })
+      },
+      Message() {
+        console.log('进入Message')
+        if (!(this.$store.getters.getUser.username)) {
+          //text 要显示的文字  time显示的毫秒数,type是是否显示图标
+          Toast({text: "请先登录！", time: 1000})
+              .then(() => {
+                console.log("关闭后执行");
+              })
+              .catch((e) => {
+                console.log(e)
+              })
+        }
       }
     }
   }

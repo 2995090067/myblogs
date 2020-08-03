@@ -36,8 +36,8 @@
         // isDisable:false,
         imgLogoUrl:"https://exp.bdstatic.com/static/exp-pc/common-jquery/widget/search-box/img/logo_83ae7e2.png",
         ruleForm: {
-          username: 'zs',
-          password: '123'
+          username: '',
+          password: ''
         },
         rules: {
           username: [
@@ -161,5 +161,7 @@
     height: 82%;
 
   }
-
+  .el-button{
+    margin: 5px;
+  }
 </style>

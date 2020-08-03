@@ -37,6 +37,7 @@ const routes = [
   },
 
   {
+    // 这个是主要页面！
     path: '/blog/:blogId',
     component: BolgDetall
   },
