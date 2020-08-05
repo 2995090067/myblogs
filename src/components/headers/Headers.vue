@@ -44,6 +44,7 @@
     created() {
       // Vue实例创建后就回去￥store中的信息
       if(this.$store.getters.getUser.username){
+        console.log("zzzzzzzzzHeaders.VUR")
         console.log('getUser')
         console.log(this.$store.getters.getUser)
         // 这里分别对应的getUser，也就是userinfo里的数据，username和avatar
@@ -57,7 +58,7 @@
       loginClick() {
         //比较字符串前先清除所有的空格
         if ('请先登录'.trim()==this.userName.default.trim()) {
-          console.log("触发点击事件")
+          console.log("触发点击事件--前去登陆")
           this.$router.push('/login')
         }else {
           return

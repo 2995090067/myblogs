@@ -4,12 +4,23 @@
 
     <el-divider direction="vertical"></el-divider>
 
-    <span><el-link type="success" :href="blogAdd" @click=Message()>我的发表</el-link></span>
+<!--    <span><el-link type="success" :href="blogAdd" @click=Message()>-->
+<!--      我的发表-->
+<!--    </el-link></span>-->
+    <span>
+      <el-link type="success"  @click=open()>
+      我的发表
+    </el-link>
+    </span>
+
+<!--    <span>-->
+<!--       <el-button type="text" @click="open" class="toblog">我的发表</el-button>-->
+<!--    </span>-->
 
     <el-divider direction="vertical"></el-divider>
 
     <span v-show='isexit'> <el-link type="danger" @click=loginExit()>退出</el-link></span>
-    <span v-show='!isexit'> <el-link type="primary" href="login">登录</el-link></span>
+    <span v-show='!isexit'> <el-link type="primary" href="/login">登录</el-link></span>
   </div>
 </template>
 
@@ -17,13 +28,13 @@
   import {loginOut} from "../../../network/loginrequest/loginout";
 
   // 吐司、
-  import Toast from "../../toast/js/index";
+  // import Toast from "../../toast/js/index";
 
   export default {
     name: "CutOffRule",
     components: {
       loginOut,
-      Toast
+      // Toast
     },
     data() {
       return {
@@ -57,22 +68,45 @@
           _this.$store.commit('REMOVE_INFO');
           // _this.$router.push('/login')
           console.log('开始跳转页面了！')
-          _this.$router.push('/logininfo')
+          _this.$router.push('/login')
         })
       },
-      Message() {
-        console.log('进入Message')
-        if (!(this.$store.getters.getUser.username)) {
-          //text 要显示的文字  time显示的毫秒数,type是是否显示图标
-          Toast({text: "请先登录！", time: 1000})
-              .then(() => {
-                console.log("关闭后执行");
-              })
-              .catch((e) => {
-                console.log(e)
-              })
+      // Message() {
+      //   console.log('进入Message')
+      //   if ((this.$store.getters.getUser.username).trim()==null) {
+      //     //text 要显示的文字  time显示的毫秒数,type是是否显示图标
+      //     Toast({text: "请先登录！", time: 1000})
+      //         .then(() => {
+      //           console.log("关闭后执行");
+      //         })
+      //         .catch((e) => {
+      //           console.log(e)
+      //         })
+      //   }
+      // },
+
+
+
+      open() {
+
+        if (this.$store.getters.getUser.username==null) {
+          this.$message({
+            type: 'info',
+            message: `请先登陆--!`,
+
+
+          });
+
+          // this.$router.push('/blogs')
+        }else {
+          this.$router.push('/blog/add')
         }
+        // element消息提示！
+
+
       }
+
+
     }
   }
 </script>
@@ -81,4 +115,10 @@
   .cut-off-rule {
     margin: 10px 0;
   }
+  /*.toblog{*/
+  /*  text-align: center;*/
+  /*  color: #12e812;*/
+  /*  margin: 0 auto;*/
+  /*  text-decoration:underline*/
+  /*}*/
 </style>
