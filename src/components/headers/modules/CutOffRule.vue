@@ -4,18 +4,11 @@
 
     <el-divider direction="vertical"></el-divider>
 
-<!--    <span><el-link type="success" :href="blogAdd" @click=Message()>-->
-<!--      我的发表-->
-<!--    </el-link></span>-->
     <span>
-      <el-link type="success"  @click=open()>
+      <el-link type="success" @click=open()>
       我的发表
-    </el-link>
+      </el-link>
     </span>
-
-<!--    <span>-->
-<!--       <el-button type="text" @click="open" class="toblog">我的发表</el-button>-->
-<!--    </span>-->
 
     <el-divider direction="vertical"></el-divider>
 
@@ -44,11 +37,12 @@
       }
     },
     created() {
-      if (this.$store.getters.getUser.username) {
+      if (this.$store.getters.getUser) {
         this.isexit = true
-      }else{
+      } else {
         this.blogAdd = '/blogs'
-        this.Message()
+        // this.Message()
+        this.open()
       }
     },
     methods: {
@@ -86,19 +80,26 @@
       // },
 
 
-
       open() {
 
-        if (this.$store.getters.getUser.username==null) {
+        if (this.$store.getters.getUser== null) {
           this.$message({
-            type: 'info',
+            // 状态改为警告未登陆
+            // warning
+            type: 'warning',
+            // 显示时长1秒
+            duration: 1000,
             message: `请先登陆--!`,
+            // 视距，默认20 px ,值是number
+            offset: 40,
+            // 字体显示是否居中
+            center: true
 
 
           });
 
           // this.$router.push('/blogs')
-        }else {
+        } else {
           this.$router.push('/blog/add')
         }
         // element消息提示！
@@ -115,6 +116,7 @@
   .cut-off-rule {
     margin: 10px 0;
   }
+
   /*.toblog{*/
   /*  text-align: center;*/
   /*  color: #12e812;*/

@@ -26,7 +26,7 @@ const routes = [
 
   // 添加路由
   {
-    path: 'blog/add',
+    path: '/blog/add',
     component: BlogEdit
   },
 
@@ -41,7 +41,7 @@ const routes = [
     path: '/blog/:blogId',
     component: BolgDetall
   },
-
+//展示页面
   {
     path: '/blogs',
     component: Blogs

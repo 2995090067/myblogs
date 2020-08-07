@@ -43,7 +43,8 @@
     },
     created() {
       // Vue实例创建后就回去￥store中的信息
-      if(this.$store.getters.getUser.username){
+      //修改版,这里之前还用了this.$store.getters.getUser.username，其实不难，因为前段不识别null
+      if(this.$store.getters.getUser){
         console.log("zzzzzzzzzHeaders.VUR")
         console.log('getUser')
         console.log(this.$store.getters.getUser)
