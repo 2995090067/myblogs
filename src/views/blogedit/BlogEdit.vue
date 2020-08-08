@@ -61,6 +61,8 @@
     },
     created() {
       // 内容回显，获取id，来自路由
+      // 这个是编辑页面！获取的是这个blogId
+      // path: '/blog/:blogId/edit',
       const blogId=this.$route.params.blogId
       console.log(blogId)
       this.blogdetalls(blogId)
