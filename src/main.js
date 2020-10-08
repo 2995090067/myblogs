@@ -20,6 +20,9 @@ import 'mavon-editor/dist/css/index.css'
 
 import "./axios"
 
+//導入路由前端登錄權限判斷
+import "./promission"
+
 // Vue.prototype.$qs=qs
 
 Vue.prototype.$axios = axios  //测试一下

@@ -97,9 +97,9 @@
 
 
           });
-
           // this.$router.push('/blogs')
         } else {
+          // alert('我的发表')
           this.$router.push('/blog/add')
         }
         // element消息提示！

@@ -23,16 +23,27 @@ const routes = [
     path: '/',
     redirect: '/blogs'
   },
+  {
+    path: '/blog',
+    redirect: '/blogs'
+  },
 
   // 添加路由
   {
     path: '/blog/add',
-    component: BlogEdit
+    component: BlogEdit,
+    meta:{
+      // 路由权限要登录才能访问
+      requireAuth:true
+    }
   },
 
   {
     path: '/blog/:blogId/edit',
-    component: BlogEdit
+    component: BlogEdit,
+    meta:{
+      requireAuth:true
+    }
 
   },
 

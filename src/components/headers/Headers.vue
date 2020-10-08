@@ -26,7 +26,7 @@
     name: "Headers",
     components: {
       HeaderItem,
-      Header,
+      Header
     },
     data() {
       return {

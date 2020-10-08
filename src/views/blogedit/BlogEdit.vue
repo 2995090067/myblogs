@@ -42,7 +42,7 @@
     data() {
       return {
         ruleForm: {
-          id:'',
+          id: '',
           title: '',
           description: '',
           content: ''
@@ -63,9 +63,11 @@
       // 内容回显，获取id，来自路由
       // 这个是编辑页面！获取的是这个blogId
       // path: '/blog/:blogId/edit',
-      const blogId=this.$route.params.blogId
-      console.log(blogId)
-      this.blogdetalls(blogId)
+      const blogId = this.$route.params.blogId
+      if (blogId != null) {
+        console.log(blogId)
+        this.blogdetalls(blogId)
+      }
     },
     methods: {
       submitForm(formName) {
@@ -82,39 +84,39 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      BlogEdit(Blog){
-        const _this=this
-        blogedit(Blog).then(res=>{
+      BlogEdit(Blog) {
+        const _this = this
+        blogedit(Blog).then(res => {
           console.log('res====>')
           console.log(res)
           // elementUI的消息提示
           this.$message({
             // 状态改为警告未登陆
             // warning
-            type:'success',
+            type: 'success',
             // 显示时长1秒
-            duration:1000,
+            duration: 1000,
             message: `发表成功--!`,
             // 视距，默认20 px ,值是number
-            offset:40,
+            offset: 40,
             // 字体显示是否居中
-            center:true
+            center: true
           })
           //成功发表跳转页面至详情页
           this.$router.push("/blogs")
 
         })
       },
-      blogdetalls(blogId){
-        const _this=this
-      blogdetall(blogId).then(res=>{
+      blogdetalls(blogId) {
+        const _this = this
+        blogdetall(blogId).then(res => {
           // 获取单条博客详情
-          const blog =res.data.data
+          const blog = res.data.data
           console.log(blog)
-        _this.ruleForm.id=res.data.data.id
-        _this.ruleForm.title=res.data.data.title
-        _this.ruleForm.description=res.data.data.description
-        _this.ruleForm.content=res.data.data.content
+          _this.ruleForm.id = res.data.data.id
+          _this.ruleForm.title = res.data.data.title
+          _this.ruleForm.description = res.data.data.description
+          _this.ruleForm.content = res.data.data.content
 
 
         })

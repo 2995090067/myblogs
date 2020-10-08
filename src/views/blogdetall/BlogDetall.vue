@@ -1,9 +1,16 @@
 <template>
   <div>
     <headers></headers>
+    <el-button @click="deleteBlog()">
+      <span class="deleteBlog" v-if="isNoShow">
+      {{deleteBlogById}}
+    </span>
+    </el-button>
+
     <div class="myblog">
       <!--标题-->
-      <h2>{{blog.title}}</h2>
+      <h2>{{blog.title}}
+      </h2>
       <!--分割线-->
       <el-divider></el-divider>
       <!--      内容-->
@@ -15,9 +22,9 @@
     </div>
     <div class="edit">
       <!--      编辑按钮-->
-      <el-button type="primary" icon="el-icon-edit">
+      <el-button type="primary" icon="el-icon-edit" v-if="isNoShow">
         <router-link :to="{path:'/blog/'+blog.id+'/edit'}">
-          编辑博客
+          {{blogText}}
         </router-link>
       </el-button>
     </div>
@@ -27,6 +34,10 @@
 <script>
   import Headers from "../../components/headers/Headers";
   import {blogdetall} from "../../network/blogdetall/blogdetall";
+  // 刪除網絡
+  import {deleteBlogs} from "../../network/blogedit/deleteblog";
+
+
   //引入之前加载的GitHubMarkdownCSS
   import 'github-markdown-css/github-markdown.css'
 
@@ -41,7 +52,10 @@
           id: '',
           title: '',
           content: ''
-        }
+        },
+        isNoShow: false,
+        blogText: '编辑博客',
+        deleteBlogById: "删除博客"
 
       }
     },
@@ -52,6 +66,38 @@
       this.blogdetalls(blogId)
     },
     methods: {
+      //刪除
+      deleteBlog() {
+        const _this = this
+        console.log('进入删除判断')
+        _this.$message({type: 'success', message: '进入删除方法!'});
+        _this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log('进入删除方法')
+          const blogId=_this.blog.id
+          // const userId = _this.$store.getters.getUser.id
+          deleteBlogs(blogId).then(res => {
+
+            console.log("blogId:===>")
+            console.log(blogId)
+            console.log('res.data.code===>')
+            console.log(res.data.code)
+                if (res.data.code='200') {
+                  console.log('刪除成功!')
+                  _this.$message({type: 'success', message: '删除成功!'});
+                  _this.$router.push("/blogs")
+
+                } else {
+                  _this.$message({type: 'warning', message: '删除失败，异常错误，请重新操作！'})
+                }
+              }
+          )
+        })
+      },
+
       blogdetalls(blogId) {
         const _this = this
         blogdetall(blogId).then(res => {
@@ -65,6 +111,8 @@
           var md = new MarkdownIt();
           var result = md.render(blog.content)
           _this.blog.content = result
+          // 判断是否本人id?
+          _this.isNoShow = (blog.userId === _this.$store.getters.getUser.id)
         })
       }
     }
@@ -80,8 +128,13 @@
     padding: 20px 15px;
 
   }
-  .edit{
+
+  .edit {
     margin: 0 auto;
     text-align: center;
+  }
+
+  .deleteBlog {
+    color: red;
   }
 </style>

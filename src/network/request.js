@@ -62,7 +62,7 @@ export function requset(config) {
       // 移除userinfo，移除登录状态
       store.commit('REMOVE_INFO')
       // 重新返回登录
-      router.push('/logininfo')
+      router.push('/login')
     }
     Element.Message.error(error.message, {duration: 3 * 1000})
     return Promise.reject(error)
